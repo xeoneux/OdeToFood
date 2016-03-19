@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +26,18 @@ namespace OdeToFood
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IGreeter greeter)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment environment, IGreeter greeter)
         {
             app.UseIISPlatformHandler();
+
+            if (environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRuntimeInfoPage("/info");
+
+            app.UseFileServer();
 
             app.Run(async (context) =>
             {
