@@ -1,5 +1,8 @@
+using Microsoft.AspNet.Mvc;
+
 namespace OdeToFood.Controllers
 {
+    [Route("[controller]/[action]")]
     public class AboutController
     {
         public string Phone()

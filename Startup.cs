@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
@@ -42,7 +41,7 @@ namespace OdeToFood
 
             app.UseFileServer();
             
-            app.UseMvc(ConfigureRoute);
+            app.UseMvc(ConfigureRoutes);
 
             app.Run(async (context) =>
             {
@@ -51,7 +50,7 @@ namespace OdeToFood
             });
         }
 
-        private void ConfigureRoute(IRouteBuilder routeBuilder)
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
         {
             routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
         }
