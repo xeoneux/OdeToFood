@@ -34,5 +34,10 @@ namespace OdeToFood.Controllers
 
             return View(model);
         }
+
+        public ViewResult Create()
+        {
+            return View();
+        }
     }
 }
