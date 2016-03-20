@@ -5,11 +5,11 @@ namespace OdeToFood.Controllers
 {
     public class HomeController : Controller
     {
-        public ObjectResult Index()
+        public ViewResult Index()
         {
             Restaurant model = new Restaurant { Id = 1, Name = "Sabatino's" };
 
-            return new ObjectResult(model);
+            return View();
         }
     }
 }
