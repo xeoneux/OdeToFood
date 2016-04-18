@@ -8,11 +8,15 @@
     @foreach (var restaurant in Model.Restaurants)
     {
         <tr>
-            <td>@Html.ActionLink(restaurant.Id.ToString(), "Details", new { id=restaurant.Id })</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@restaurant.Id">Details</a>
+            </td>
             <td>@restaurant.Name</td>
         </tr>
     }
 </table>
+
+<a asp-action="Create"></a>
 
 @section footer {
     <div>@Model.CurrentGreeting</div>
