@@ -80,6 +80,7 @@ namespace OdeToFood.Controllers
                 restaurant.Cuisine = model.Cuisine;
 
                 _restaurantData.Add(restaurant);
+                _restaurantData.Commit();
 
                 return RedirectToAction("Details", new { id = restaurant.Id });
             }
