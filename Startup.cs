@@ -6,6 +6,7 @@ using Microsoft.AspNet.Routing;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using OdeToFood.Entities;
 using OdeToFood.Services;
 
@@ -40,7 +41,11 @@ namespace OdeToFood
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment environment, IGreeter greeter)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment environment,
+            IApplicationEnvironment appEnvironment,
+            IGreeter greeter)
         {
             app.UseIISPlatformHandler();
 
@@ -52,7 +57,9 @@ namespace OdeToFood
             app.UseRuntimeInfoPage("/info");
 
             app.UseFileServer();
-            
+
+            app.UseNodeModules(appEnvironment);
+
             app.UseIdentity();
 
             app.UseMvc(ConfigureRoutes);
