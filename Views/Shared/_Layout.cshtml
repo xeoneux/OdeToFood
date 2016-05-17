@@ -6,30 +6,38 @@
 <head>
     <meta charset="UTF-8">
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/node_modules/bootswatch/lumen/bootstrap.min.css">
 </head>
 <body>
-    <div>
-        @if (User.IsSignedIn())
-        {
-            <div>@User.GetUserName()</div>
-            <form method="POST" asp-controller="Account" asp-action="Logout">
-                <input type="submit" value="Logout">
-            </form>
-        }
-        else
-        {
-           <a asp-controller="Account" asp-action="Login">Login</a> 
-           <a asp-controller="Account" asp-action="Register">Register</a> 
-        }
-    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">OdeToFood</a>
+            </div>
+            
+            <div class="navbar navbar-nav navbar-right">
+                @if (User.IsSignedIn())
+                {
+                    <form method="POST" asp-controller="Account" asp-action="Logout" class="navbar-form">
+                        @User.GetUserName()
+                        <input type="submit" value="Logout" class="btn btn-danger">
+                    </form>
+                }
+                else
+                {
+                <a class="btn btn-default btn-xs navbar-btn" asp-controller="Account" asp-action="Login">Login</a> 
+                <a class="btn btn-default btn-xs navbar-btn" asp-controller="Account" asp-action="Register">Register</a> 
+                }
+            </div>
+        </div>
+    </nav>
     
-    <div>
+    <div class="container">
         @RenderBody()
+        <footer>
+            @RenderSection("footer", false)
+            @Component.Invoke("Greeting")
+        </footer>
     </div>
-    
-    <footer>
-        @RenderSection("footer", false)
-        @Component.Invoke("Greeting")
-    </footer>
 </body>
 </html>
